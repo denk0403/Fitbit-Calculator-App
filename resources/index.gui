@@ -1,0 +1,328 @@
+<svg class="background">
+  
+  <use id="container" href="#panoramaview">
+    
+    <!-- 4 function Calculator -->
+    <use id="item1" href="#panoramaview-item">
+      
+      <text id="answer" />
+
+      <svg class="input">
+        <use id="clear" href="#push-button" x="5" y="50" width="95" height="40"
+          fill="fb-red" font-family="System-Regular" font-size="25">
+          <set href="#text" attributeName="text-buffer" to="AC" />
+          <set href="#text" attributeName="y" to="10" />
+        </use>
+        <use id="plus" class="operation" href="#push-button" x="$+3" y="50" width="95" height="40"
+          fill="fb-red" font-family="System-Regular" font-size="25">
+          <set href="#text" attributeName="text-buffer" to="+" />
+          <set href="#text" attributeName="y" to="10" />
+        </use>
+        <use id="equal" href="#push-button" x="$+3" y="50" width="95" height="40"
+          fill="fb-red" font-family="System-Regular" font-size="25">
+          <set href="#text" attributeName="text-buffer" to="=" />
+          <set href="#text" attributeName="y" to="10" />
+        </use>
+        <use id="minus" class="operation" href="#push-button" x="5" y="$+3" width="95" height="40"
+          fill="fb-red" font-family="System-Regular" font-size="25">
+          <set href="#text" attributeName="text-buffer" to="-" />
+          <set href="#text" attributeName="y" to="10" />
+        </use>
+        <use id="multiply" class="operation" href="#push-button" x="$+3" y="$-40" width="95" height="40"
+          fill="fb-red" font-family="System-Regular" font-size="25">
+          <set href="#text" attributeName="text-buffer" to="x" />
+          <set href="#text" attributeName="y" to="10" />
+        </use>
+        <use id="divide" class="operation" href="#push-button" x="$+3" y="$-40" width="95" height="40"
+          fill="fb-red" font-family="System-Regular" font-size="30">
+          <set href="#text" attributeName="text-buffer" to="÷" />
+          <set href="#text" attributeName="y" to="10" />
+        </use>
+        <use class="number" href="#push-button" x="5" y="$+3" width="95" height="40"
+          fill="fb-red" font-family="System-Regular" font-size="25">
+          <set href="#text" attributeName="text-buffer" to="7" />
+          <set href="#text" attributeName="y" to="10" />
+        </use>
+        <use class="number" href="#push-button" x="$+3" y="$-40" width="95" height="40"
+          fill="fb-red" font-family="System-Regular" font-size="25">
+          <set href="#text" attributeName="text-buffer" to="8" />
+          <set href="#text" attributeName="y" to="10" />
+        </use>
+        <use class="number" href="#push-button" x="$+3" y="$-40" width="95" height="40"
+          fill="fb-red" font-family="System-Regular" font-size="25">
+          <set href="#text" attributeName="text-buffer" to="9" />
+          <set href="#text" attributeName="y" to="10" />
+        </use>
+        <use class="number" href="#push-button" x="5" y="$+3" width="95" height="40"
+          fill="fb-red" font-family="System-Regular" font-size="25">
+          <set href="#text" attributeName="text-buffer" to="4" />
+          <set href="#text" attributeName="y" to="10" />
+        </use>
+        <use class="number" href="#push-button" x="$+3" y="$-40" width="95" height="40"
+          fill="fb-red" font-family="System-Regular" font-size="25">
+          <set href="#text" attributeName="text-buffer" to="5" />
+          <set href="#text" attributeName="y" to="10" />
+        </use>
+        <use class="number" href="#push-button" x="$+3" y="$-40" width="95" height="40"
+          fill="fb-red" font-family="System-Regular" font-size="25">
+          <set href="#text" attributeName="text-buffer" to="6" />
+          <set href="#text" attributeName="y" to="10" />
+        </use>
+        <use class="number" href="#push-button" x="5" y="$+3" width="95" height="40"
+          fill="fb-red" font-family="System-Regular" font-size="25">
+          <set href="#text" attributeName="text-buffer" to="1" />
+          <set href="#text" attributeName="y" to="10" />
+        </use>
+        <use class="number" href="#push-button" x="$+3" y="$-40" width="95" height="40"
+          fill="fb-red" font-family="System-Regular" font-size="25">
+          <set href="#text" attributeName="text-buffer" to="2" />
+          <set href="#text" attributeName="y" to="10" />
+        </use>
+        <use class="number" href="#push-button" x="$+3" y="$-40" width="95" height="40"
+          fill="fb-red" font-family="System-Regular" font-size="25">
+          <set href="#text" attributeName="text-buffer" to="3" />
+          <set href="#text" attributeName="y" to="10" />
+        </use>
+        <use class="number" href="#push-button" x="5" y="$+3" width="193" height="40"
+          fill="fb-red" font-family="System-Regular" font-size="25">
+          <set href="#text" attributeName="text-buffer" to="0" />
+          <set href="#text" attributeName="y" to="5" />
+        </use>
+        <use id="decimal" href="#push-button" x="$+3" y="$-40" width="95" height="40"
+          fill="fb-red" font-family="System-Regular" font-size="25">
+          <set href="#text" attributeName="text-buffer" to="." />
+          <set href="#text" attributeName="y" to="5" />
+        </use>
+      </svg>
+      
+    </use>
+    
+    <!-- Gratuity Calculator -->
+    <use id="item2" href="#panoramaview-item">
+      
+      <svg id="tumblers">
+       
+        <!-- hundreds dollars -->
+        <use id="hundreds_dollars" class="tumbler" href="#tumblerview" x="0" width="50">
+          <use id="item8" href="#tumbler-item" class="item">
+            <text id="content">0</text>
+          </use>
+          <use id="item0" href="#tumbler-item" class="item">
+            <text id="content">1</text>
+          </use>
+          <use id="item1" href="#tumbler-item" class="item">
+            <text id="content">2</text>
+          </use>
+          <use id="item2" href="#tumbler-item" class="item">
+            <text id="content">3</text>
+          </use>
+          <use id="item3" href="#tumbler-item" class="item">
+            <text id="content">4</text>
+          </use>
+          <use id="item4" href="#tumbler-item" class="item">
+            <text id="content">5</text>
+          </use>
+          <use id="item5" href="#tumbler-item" class="item">
+            <text id="content">6</text>
+          </use>
+          <use id="item6" href="#tumbler-item" class="item">
+            <text id="content">7</text>
+          </use>
+          <use id="item7" href="#tumbler-item" class="item">
+            <text id="content">8</text>
+          </use>
+          <use id="item8" href="#tumbler-item" class="item">
+            <text id="content">9</text>
+          </use>
+        </use>
+
+        <!-- tens dollars -->
+        <use id="tens_dollars" class="tumbler" href="#tumblerview" x="50" width="50">
+          <use id="item8" href="#tumbler-item" class="item">
+            <text id="content">0</text>
+          </use>
+          <use id="item0" href="#tumbler-item" class="item">
+            <text id="content">1</text>
+          </use>
+          <use id="item1" href="#tumbler-item" class="item">
+            <text id="content">2</text>
+          </use>
+          <use id="item2" href="#tumbler-item" class="item">
+            <text id="content">3</text>
+          </use>
+          <use id="item3" href="#tumbler-item" class="item">
+            <text id="content">4</text>
+          </use>
+          <use id="item4" href="#tumbler-item" class="item">
+            <text id="content">5</text>
+          </use>
+          <use id="item5" href="#tumbler-item" class="item">
+            <text id="content">6</text>
+          </use>
+          <use id="item6" href="#tumbler-item" class="item">
+            <text id="content">7</text>
+          </use>
+          <use id="item7" href="#tumbler-item" class="item">
+            <text id="content">8</text>
+          </use>
+          <use id="item8" href="#tumbler-item" class="item">
+            <text id="content">9</text>
+          </use>
+        </use>
+
+        <!-- ones dollars -->
+        <use id="ones_dollars" class="tumbler" href="#tumblerview" x="100" width="50">
+          <use id="item8" href="#tumbler-item" class="item">
+            <text id="content">0</text>
+          </use>
+          <use id="item0" href="#tumbler-item" class="item">
+            <text id="content">1</text>
+          </use>
+          <use id="item1" href="#tumbler-item" class="item">
+            <text id="content">2</text>
+          </use>
+          <use id="item2" href="#tumbler-item" class="item">
+            <text id="content">3</text>
+          </use>
+          <use id="item3" href="#tumbler-item" class="item">
+            <text id="content">4</text>
+          </use>
+          <use id="item4" href="#tumbler-item" class="item">
+            <text id="content">5</text>
+          </use>
+          <use id="item5" href="#tumbler-item" class="item">
+            <text id="content">6</text>
+          </use>
+          <use id="item6" href="#tumbler-item" class="item">
+            <text id="content">7</text>
+          </use>
+          <use id="item7" href="#tumbler-item" class="item">
+            <text id="content">8</text>
+          </use>
+          <use id="item8" href="#tumbler-item" class="item">
+            <text id="content">9</text>
+          </use>
+        </use>
+        
+        <!-- tens cents -->
+        <use id="tens_cents" class="tumbler" href="#tumblerview" x="150" width="75">
+          <use id="item8" href="#tumbler-item" class="item">
+            <text id="content">0</text>
+          </use>
+          <use id="item0" href="#tumbler-item" class="item">
+            <text id="content">1</text>
+          </use>
+          <use id="item1" href="#tumbler-item" class="item">
+            <text id="content">2</text>
+          </use>
+          <use id="item2" href="#tumbler-item" class="item">
+            <text id="content">3</text>
+          </use>
+          <use id="item3" href="#tumbler-item" class="item">
+            <text id="content">4</text>
+          </use>
+          <use id="item4" href="#tumbler-item" class="item">
+            <text id="content">5</text>
+          </use>
+          <use id="item5" href="#tumbler-item" class="item">
+            <text id="content">6</text>
+          </use>
+          <use id="item6" href="#tumbler-item" class="item">
+            <text id="content">7</text>
+          </use>
+          <use id="item7" href="#tumbler-item" class="item">
+            <text id="content">8</text>
+          </use>
+          <use id="item8" href="#tumbler-item" class="item">
+            <text id="content">9</text>
+          </use>
+        </use>
+        
+        <!-- ones cents -->
+        <use id="ones_cents" class="tumbler" href="#tumblerview" x="225" width="75">
+          <use id="item8" href="#tumbler-item" class="item">
+            <text id="content">0</text>
+          </use>
+          <use id="item0" href="#tumbler-item" class="item">
+            <text id="content">1</text>
+          </use>
+          <use id="item1" href="#tumbler-item" class="item">
+            <text id="content">2</text>
+          </use>
+          <use id="item2" href="#tumbler-item" class="item">
+            <text id="content">3</text>
+          </use>
+          <use id="item3" href="#tumbler-item" class="item">
+            <text id="content">4</text>
+          </use>
+          <use id="item4" href="#tumbler-item" class="item">
+            <text id="content">5</text>
+          </use>
+          <use id="item5" href="#tumbler-item" class="item">
+            <text id="content">6</text>
+          </use>
+          <use id="item6" href="#tumbler-item" class="item">
+            <text id="content">7</text>
+          </use>
+          <use id="item7" href="#tumbler-item" class="item">
+            <text id="content">8</text>
+          </use>
+          <use id="item8" href="#tumbler-item" class="item">
+            <text id="content">9</text>
+          </use>
+        </use>
+      </svg>
+      
+      <rect x="0" y="0" width="100%" height="50" />
+      <circle cx="140" cy="120" r="2" fill="white"/>
+      
+      <text class="header" x="5">Dollars</text>
+      <text class="header" x="155">Cents</text>
+      
+      <use class="percentage" href="#push-button" x="5" width="45" 
+          fill="fb-red" font-family="System-Regular" font-size="19">
+          <set href="#text" attributeName="text-buffer" to="15%" />
+          <set href="#text" attributeName="y" to="5" />
+      </use>
+      <use class="percentage" href="#push-button" x="$+5" width="45"
+          fill="fb-red" font-family="System-Regular" font-size="19">
+          <set href="#text" attributeName="text-buffer" to="16%" />
+          <set href="#text" attributeName="y" to="5" />
+      </use>
+      <use class="percentage" href="#push-button" x="$+5" width="45"
+          fill="fb-red" font-family="System-Regular" font-size="19">
+          <set href="#text" attributeName="text-buffer" to="17%" />
+          <set href="#text" attributeName="y" to="5" />
+      </use>
+      <use class="percentage" href="#push-button" x="$+5" width="45"
+          fill="fb-red" font-family="System-Regular" font-size="19">
+          <set href="#text" attributeName="text-buffer" to="18%" />
+          <set href="#text" attributeName="y" to="5" />
+      </use>
+      <use class="percentage" href="#push-button" x="$+5" width="45"
+          fill="fb-red" font-family="System-Regular" font-size="19">
+          <set href="#text" attributeName="text-buffer" to="19%" />
+          <set href="#text" attributeName="y" to="5" />
+      </use>
+      <use class="percentage" href="#push-button" x="$+5" width="40"
+          fill="fb-red" font-family="System-Regular" font-size="19">
+          <set href="#text" attributeName="text-buffer" to="20%" />
+          <set href="#text" attributeName="y" to="5" />
+      </use>
+      
+      <text id="tip" />
+      <text id="newTotal" />
+    </use>
+
+    <!-- Have enough pagination dots for your slides (extras are hidden) -->
+    <use id="pagination-dots" href="#pagination-widget" y="8">
+      <use href="#pagination-dot" />
+      <use href="#pagination-dot" />
+      <use href="#pagination-dot" />
+      <use href="#pagination-dot" />
+      <use href="#pagination-dot" />
+      <use href="#pagination-highlight-dot" />
+    </use>
+  </use>
+  
+</svg>

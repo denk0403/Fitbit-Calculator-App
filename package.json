@@ -1,0 +1,23 @@
+{
+  "fitbit": {
+    "appUUID": "442eb38d-d42a-456d-b36e-7f652d134d48",
+    "appType": "app",
+    "appDisplayName": "Calculator",
+    "iconFile": "resources/icon.png",
+    "wipeColor": "#8bc34a",
+    "requestedPermissions": [],
+    "buildTargets": [
+      "meson",
+      "gemini"
+    ],
+    "i18n": {
+      "en": {
+        "name": "Calculator"
+      }
+    },
+    "defaultLanguage": "en-US"
+  },
+  "devDependencies": {
+    "@fitbit/sdk": "~3.1.0"
+  }
+}
