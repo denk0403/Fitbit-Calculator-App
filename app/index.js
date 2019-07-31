@@ -126,9 +126,11 @@ function round_to_precision(x, precision) {
 }
 
 function recompute() {
-  total = (hd.value * 100) + (td.value * 10) + (od.value * 1) + (tc.value * 0.1) + (oc.value * 0.01);
-  tipElem.text = "Tip: $" + round_to_precision((total * tip), 0.01).toFixed(2);
-  totalElem.text = "New Total: $" + round_to_precision((total * (1 + tip)), 0.01).toFixed(2);
+  if (tip) {
+    total = (hd.value * 100) + (td.value * 10) + (od.value * 1) + (tc.value * 0.1) + (oc.value * 0.01);
+    tipElem.text = "Tip: $" + round_to_precision((total * tip), 0.01).toFixed(2);
+    totalElem.text = "New Total: $" + round_to_precision((total * (1 + tip)), 0.01).toFixed(2);
+  }
 }
 
 let response = function(evt) {recompute()};
