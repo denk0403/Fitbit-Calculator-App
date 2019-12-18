@@ -2,108 +2,223 @@
   
   <use id="container" href="#panoramaview">
     
-    <!-- 4 function Calculator -->
+    <!-- Stack Viewer -->
     <use id="item1" href="#panoramaview-item">
-      
-      <text id="answer" />
+      <defs>
+        <symbol id="my-tile-item" href="#tile-list-item" focusable="false"
+                pointer-events="none" system-events="all" display="none">
+          <text id="text" text-length="16" />
+          <rect id="tile-divider-bottom" class="tile-divider-bottom" />
+          <rect id="touch-me" pointer-events="all" x="0" y="0" width="100%"
+                height="100%-2" opacity="0" />
+        </symbol>
+      </defs>
+      <use id="my-list" href="#tile-list" y="50" height="100%-50">
+        <var id="virtual" value="1" />
+        <var id="separator-height-bottom" value="2" />
 
-      <svg class="input">
-        <use id="clear" href="#push-button" x="5" y="50" width="95" height="40"
-          fill="fb-red" font-family="System-Regular" font-size="25">
+        <use id="my-pool" href="#tile-list-pool">
+          <use id="my-pool[0]" href="#my-tile-item" class="tile-list-item" />
+          <use id="my-pool[1]" href="#my-tile-item" class="tile-list-item" />
+          <use id="my-pool[2]" href="#my-tile-item" class="tile-list-item" />
+          <use id="my-pool[3]" href="#my-tile-item" class="tile-list-item" />
+          <use id="my-pool[4]" href="#my-tile-item" class="tile-list-item" />
+          <use id="my-pool[5]" href="#my-tile-item" class="tile-list-item" />
+          <use id="my-pool[6]" href="#my-tile-item" class="tile-list-item" />
+          <use id="my-pool[7]" href="#my-tile-item" class="tile-list-item" />
+          <use id="my-pool[8]" href="#my-tile-item" class="tile-list-item" />
+          <use id="my-pool[9]" href="#my-tile-item" class="tile-list-item" />
+        </use>
+      </use>
+      <rect x="0" y="0" width="100%" height="50" fill="black" />
+      <text x="5" y="40" fill="yellow" font-size="35">Stack</text>
+      <use id="stackClear" href="#square-button" y="5" x="200" width="95" height="50"
+        fill="white" font-family="System-Regular">
+        <set href="#text" attributeName="text-buffer" to="Clear" />
+        <set href="#text" attributeName="font-size" to="35" />
+      </use>
+    </use>
+    
+    <!-- Calculator Operation Input -->
+    <use id="item2" href="#panoramaview-item">
+      <use id="plus" class="binary operation" href="#push-button" x="5" y="20" width="95" height="53"
+        fill="crimson" font-family="System-Regular" font-size="40">
+        <set href="#text" attributeName="text-buffer" to="+" />
+        <set href="#text" attributeName="y" to="10" />
+      </use>
+      <use id="minus" class="binary operation" href="#push-button" x="$+3" y="$-53" width="95" height="53"
+        fill="crimson" font-family="System-Regular" font-size="40">
+        <set href="#text" attributeName="text-buffer" to="-" />
+        <set href="#text" attributeName="y" to="10" />
+      </use>
+      <use id="multiply" class="binary operation" href="#push-button" x="$+3" y="$-53" width="95" height="53"
+        fill="crimson" font-family="System-Regular" font-size="40">
+        <set href="#text" attributeName="text-buffer" to="x" />
+        <set href="#text" attributeName="y" to="10" />
+      </use>
+      <use id="divide" class="binary operation" href="#push-button" x="5" y="$+3" width="95" height="53"
+        fill="crimson" font-family="System-Regular" font-size="50">
+        <set href="#text" attributeName="text-buffer" to="÷" />
+        <set href="#text" attributeName="y" to="10" />
+      </use>
+      <use id="exponent" class="binary operation" href="#push-button" x="$+3" y="$-53" width="95" height="53"
+        fill="crimson" font-family="System-Regular" font-size="30">
+        <set href="#text" attributeName="text-buffer" to="x^y" />
+        <set href="#text" attributeName="y" to="10" />
+      </use>
+      <use id="log" class="binary operation" href="#push-button" x="$+3" y="$-53" width="95" height="53"
+        fill="crimson" font-family="System-Regular" font-size="30">
+        <set href="#text" attributeName="text-buffer" to="logx(y)" />
+        <set href="#text" attributeName="y" to="10" />
+      </use>
+      <use id="reciprocal" class="unary operation" href="#push-button" x="5" y="$+3" width="95" height="53"
+        fill="darkred" font-family="System-Regular" font-size="30">
+        <set href="#text" attributeName="text-buffer" to="1/x" />
+        <set href="#text" attributeName="y" to="10" />
+      </use>
+      <use id="factorial" class="unary operation" href="#push-button" x="$+3" y="$-53" width="95" height="53"
+        fill="darkred" font-family="System-Regular" font-size="30">
+        <set href="#text" attributeName="text-buffer" to="x!" />
+        <set href="#text" attributeName="y" to="10" />
+      </use>
+      <use id="plus-minus" class="unary operation" href="#push-button" x="$+3" y="$-53" width="95" height="53"
+        fill="darkred" font-family="System-Regular" font-size="30">
+        <set href="#text" attributeName="text-buffer" to="+/-" />
+        <set href="#text" attributeName="y" to="10" />
+      </use>
+      <use id="sin" class="unary operation" href="#push-button" x="5" y="$+3" width="95" height="53"
+        fill="darkred" font-family="System-Regular" font-size="30">
+        <set href="#text" attributeName="text-buffer" to="sin" />
+        <set href="#text" attributeName="y" to="10" />
+      </use>
+      <use id="cos" class="unary operation" href="#push-button" x="$+3" y="$-53" width="95" height="53"
+        fill="darkred" font-family="System-Regular" font-size="30">
+        <set href="#text" attributeName="text-buffer" to="cos" />
+        <set href="#text" attributeName="y" to="10" />
+      </use>
+      <use id="tan" class="unary operation" href="#push-button" x="$+3" y="$-53" width="95" height="53"
+        fill="darkred" font-family="System-Regular" font-size="30">
+        <set href="#text" attributeName="text-buffer" to="tan" />
+        <set href="#text" attributeName="y" to="10" />
+      </use>
+      <use id="flip" class="unary operation" href="#push-button" x="5" y="$+3" width="144" height="53"
+        fill="darkred" font-family="System-Regular" font-size="25">
+        <set href="#text" attributeName="text-buffer" to="Flip x<-->y" />
+        <set href="#text" attributeName="y" to="10" />
+      </use>
+      <use id="equal" href="#push-button" x="$+3" y="$-53" width="144" height="53"
+        fill="green" font-family="System-Regular" font-size="40">
+        <set href="#text" attributeName="text-buffer" to="=" />
+        <set href="#text" attributeName="y" to="10" />
+      </use>
+    </use>
+    
+    <!-- Calculator Number Input -->
+    <use id="item3" href="#panoramaview-item">
+      
+      <text id="answer">0</text>
+      <text id="approximate" visibility="hidden">≈</text>
+      
+      <svg class="drawingPanel">
+        
+      </svg> 
+        
+      <svg class="buttonInput">
+        <use id="clear" href="#push-button" x="5" y="50" width="95" height="47"
+          fill="fb-red" font-family="System-Regular" font-size="30">
           <set href="#text" attributeName="text-buffer" to="AC" />
           <set href="#text" attributeName="y" to="10" />
         </use>
-        <use id="plus" class="operation" href="#push-button" x="$+3" y="50" width="95" height="40"
-          fill="fb-red" font-family="System-Regular" font-size="25">
-          <set href="#text" attributeName="text-buffer" to="+" />
-          <set href="#text" attributeName="y" to="10" />
-        </use>
-        <use id="equal" href="#push-button" x="$+3" y="50" width="95" height="40"
-          fill="fb-red" font-family="System-Regular" font-size="25">
-          <set href="#text" attributeName="text-buffer" to="=" />
-          <set href="#text" attributeName="y" to="10" />
-        </use>
-        <use id="minus" class="operation" href="#push-button" x="5" y="$+3" width="95" height="40"
-          fill="fb-red" font-family="System-Regular" font-size="25">
-          <set href="#text" attributeName="text-buffer" to="-" />
-          <set href="#text" attributeName="y" to="10" />
-        </use>
-        <use id="multiply" class="operation" href="#push-button" x="$+3" y="$-40" width="95" height="40"
-          fill="fb-red" font-family="System-Regular" font-size="25">
-          <set href="#text" attributeName="text-buffer" to="x" />
-          <set href="#text" attributeName="y" to="10" />
-        </use>
-        <use id="divide" class="operation" href="#push-button" x="$+3" y="$-40" width="95" height="40"
+        <use id="e" class="constant" href="#push-button" x="$+3" y="$-47" width="95" height="47"
           fill="fb-red" font-family="System-Regular" font-size="30">
-          <set href="#text" attributeName="text-buffer" to="÷" />
+          <set href="#text" attributeName="text-buffer" to="e" />
           <set href="#text" attributeName="y" to="10" />
         </use>
-        <use class="number" href="#push-button" x="5" y="$+3" width="95" height="40"
-          fill="fb-red" font-family="System-Regular" font-size="25">
+        <use id="pi" class="constant" href="#push-button" x="$+3" y="$-47" width="95" height="47"
+          fill="fb-red" font-family="System-Regular" font-size="30">
+          <set href="#text" attributeName="text-buffer" to="π" />
+          <set href="#text" attributeName="y" to="10" />
+        </use>
+        <use class="number" href="#push-button" x="5" y="$+3" width="95" height="47"
+          fill="fb-red" font-family="System-Regular" font-size="30">
           <set href="#text" attributeName="text-buffer" to="7" />
           <set href="#text" attributeName="y" to="10" />
         </use>
-        <use class="number" href="#push-button" x="$+3" y="$-40" width="95" height="40"
-          fill="fb-red" font-family="System-Regular" font-size="25">
+        <use class="number" href="#push-button" x="$+3" y="$-47" width="95" height="47"
+          fill="fb-red" font-family="System-Regular" font-size="30">
           <set href="#text" attributeName="text-buffer" to="8" />
           <set href="#text" attributeName="y" to="10" />
         </use>
-        <use class="number" href="#push-button" x="$+3" y="$-40" width="95" height="40"
-          fill="fb-red" font-family="System-Regular" font-size="25">
+        <use class="number" href="#push-button" x="$+3" y="$-47" width="95" height="47"
+          fill="fb-red" font-family="System-Regular" font-size="30">
           <set href="#text" attributeName="text-buffer" to="9" />
           <set href="#text" attributeName="y" to="10" />
         </use>
-        <use class="number" href="#push-button" x="5" y="$+3" width="95" height="40"
-          fill="fb-red" font-family="System-Regular" font-size="25">
+        <use class="number" href="#push-button" x="5" y="$+3" width="95" height="47"
+          fill="fb-red" font-family="System-Regular" font-size="30">
           <set href="#text" attributeName="text-buffer" to="4" />
           <set href="#text" attributeName="y" to="10" />
         </use>
-        <use class="number" href="#push-button" x="$+3" y="$-40" width="95" height="40"
-          fill="fb-red" font-family="System-Regular" font-size="25">
+        <use class="number" href="#push-button" x="$+3" y="$-47" width="95" height="47"
+          fill="fb-red" font-family="System-Regular" font-size="30">
           <set href="#text" attributeName="text-buffer" to="5" />
           <set href="#text" attributeName="y" to="10" />
         </use>
-        <use class="number" href="#push-button" x="$+3" y="$-40" width="95" height="40"
-          fill="fb-red" font-family="System-Regular" font-size="25">
+        <use class="number" href="#push-button" x="$+3" y="$-47" width="95" height="47"
+          fill="fb-red" font-family="System-Regular" font-size="30">
           <set href="#text" attributeName="text-buffer" to="6" />
           <set href="#text" attributeName="y" to="10" />
         </use>
-        <use class="number" href="#push-button" x="5" y="$+3" width="95" height="40"
-          fill="fb-red" font-family="System-Regular" font-size="25">
+        <use class="number" href="#push-button" x="5" y="$+3" width="95" height="47"
+          fill="fb-red" font-family="System-Regular" font-size="30">
           <set href="#text" attributeName="text-buffer" to="1" />
           <set href="#text" attributeName="y" to="10" />
         </use>
-        <use class="number" href="#push-button" x="$+3" y="$-40" width="95" height="40"
-          fill="fb-red" font-family="System-Regular" font-size="25">
+        <use class="number" href="#push-button" x="$+3" y="$-47" width="95" height="47"
+          fill="fb-red" font-family="System-Regular" font-size="30">
           <set href="#text" attributeName="text-buffer" to="2" />
           <set href="#text" attributeName="y" to="10" />
         </use>
-        <use class="number" href="#push-button" x="$+3" y="$-40" width="95" height="40"
-          fill="fb-red" font-family="System-Regular" font-size="25">
+        <use class="number" href="#push-button" x="$+3" y="$-47" width="95" height="47"
+          fill="fb-red" font-family="System-Regular" font-size="30">
           <set href="#text" attributeName="text-buffer" to="3" />
           <set href="#text" attributeName="y" to="10" />
         </use>
-        <use class="number" href="#push-button" x="5" y="$+3" width="193" height="40"
-          fill="fb-red" font-family="System-Regular" font-size="25">
+        <use class="number" href="#push-button" x="5" y="$+3" width="95" height="47"
+          fill="fb-red" font-family="System-Regular" font-size="30">
           <set href="#text" attributeName="text-buffer" to="0" />
-          <set href="#text" attributeName="y" to="5" />
+          <set href="#text" attributeName="y" to="10" />
         </use>
-        <use id="decimal" href="#push-button" x="$+3" y="$-40" width="95" height="40"
-          fill="fb-red" font-family="System-Regular" font-size="25">
+        <use id="decimal" href="#push-button" x="$+3" y="$-47" width="95" height="47"
+          fill="fb-red" font-family="System-Regular" font-size="40">
           <set href="#text" attributeName="text-buffer" to="." />
           <set href="#text" attributeName="y" to="5" />
+        </use>
+        <use id="push" href="#push-button" x="$+3" y="$-47" width="46" height="47"
+          fill="fb-red" font-family="System-Regular" font-size="40">
+          <set href="#text" attributeName="font-family" to="Fabrikat-Bold" />
+          <set href="#text" attributeName="text-buffer" to="↑" />
+          <set href="#text" attributeName="y" to="13" />
+          <set href="#text" attributeName="x" to="-2" />
+        </use>
+        <use id="pull" href="#push-button" x="$+3" y="$-47" width="46" height="47"
+          fill="fb-red" font-family="System-Regular" font-size="40">
+          <set href="#text" attributeName="font-family" to="Fabrikat-Bold" />
+          <set href="#text" attributeName="text-buffer" to="↓" />
+          <set href="#text" attributeName="y" to="13" />
+          <set href="#text" attributeName="x" to="-2" />
         </use>
       </svg>
       
     </use>
     
     <!-- Gratuity Calculator -->
-    <use id="item2" href="#panoramaview-item">
+    <use id="item4" href="#panoramaview-item">
       
       <svg id="tumblers">
        
         <!-- hundreds dollars -->
-        <use id="hundreds_dollars" class="tumbler" href="#tumblerview" x="0" width="50">
+        <use id="hundreds_dollars" class="tumbler" href="#tumblerview" x="0" width="60">
           <use id="item8" href="#tumbler-item" class="item">
             <text id="content">0</text>
           </use>
@@ -137,7 +252,7 @@
         </use>
 
         <!-- tens dollars -->
-        <use id="tens_dollars" class="tumbler" href="#tumblerview" x="50" width="50">
+        <use id="tens_dollars" class="tumbler" href="#tumblerview" x="60" width="60">
           <use id="item8" href="#tumbler-item" class="item">
             <text id="content">0</text>
           </use>
@@ -171,7 +286,7 @@
         </use>
 
         <!-- ones dollars -->
-        <use id="ones_dollars" class="tumbler" href="#tumblerview" x="100" width="50">
+        <use id="ones_dollars" class="tumbler" href="#tumblerview" x="120" width="60">
           <use id="item8" href="#tumbler-item" class="item">
             <text id="content">0</text>
           </use>
@@ -205,7 +320,7 @@
         </use>
         
         <!-- tens cents -->
-        <use id="tens_cents" class="tumbler" href="#tumblerview" x="150" width="75">
+        <use id="tens_cents" class="tumbler" href="#tumblerview" x="180" width="60">
           <use id="item8" href="#tumbler-item" class="item">
             <text id="content">0</text>
           </use>
@@ -239,7 +354,7 @@
         </use>
         
         <!-- ones cents -->
-        <use id="ones_cents" class="tumbler" href="#tumblerview" x="225" width="75">
+        <use id="ones_cents" class="tumbler" href="#tumblerview" x="240" width="60">
           <use id="item8" href="#tumbler-item" class="item">
             <text id="content">0</text>
           </use>
@@ -274,10 +389,10 @@
       </svg>
       
       <rect x="0" y="0" width="100%" height="50" />
-      <circle cx="140" cy="120" r="2" fill="white"/>
+      <circle cx="175" cy="120" r="2" fill="white"/>
       
       <text class="header" x="5">Dollars</text>
-      <text class="header" x="155">Cents</text>
+      <text class="header" x="180">Cents</text>
       
       <use class="percentage" href="#push-button" x="5" width="45" 
           fill="fb-red" font-family="System-Regular" font-size="19">

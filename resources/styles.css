@@ -8,13 +8,23 @@
   x: 295;
   y: 47;
   text-length: 1000;
-  font-size: 40;
+  font-size: 39;
+  fill: white;
+}
+
+#approximate {
+  text-anchor: start;
+  font-family: Fabrikat-Bold;
+  x: 5;
+  y: 20;
+  text-length: 1;
+  font-size: 30;
   fill: white;
 }
 
 .tumbler { y: 85; height: 50}
-.item { height: 40; }
-.item text { font-size: 35; fill: white; x: 5;  }
+.item { width: 60; height: 40; }
+.item text { font-size: 40; fill: white; x: 15;  }
 
 .header {
   y: 45;
@@ -46,4 +56,22 @@
 .percentage {
   y: 175;
   height: 50;
+}
+
+.tile-list-item {
+  height: 60;
+}
+
+.tile-list-item text {
+  font-family: System-Regular;
+  fill: "white";
+  font-size: 30;
+}
+
+.tile-divider-bottom {
+  x: 0;
+  y: 100%-2;
+  width: 100%;
+  height: 2;
+  fill: #A0A0A0;
 }
