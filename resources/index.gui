@@ -31,7 +31,7 @@
         </use>
       </use>
       <rect x="0" y="0" width="100%" height="50" fill="black" />
-      <text x="5" y="40" fill="yellow" font-size="35">Stack</text>
+      <text x="5" y="40" fill="yellow" font-size="35">Saved</text>
       <use id="stackClear" href="#square-button" y="5" x="200" width="95" height="50"
         fill="white" font-family="System-Regular">
         <set href="#text" attributeName="text-buffer" to="Clear" />

@@ -23,26 +23,29 @@ let operation;
 let clearNext = true;
 let broken = false;
 let decimalSet = false;
-let stack = new Array();
+let stack = [];
+let waitClearTimeout = null;
 
 container.value = 2;
 
 VTList.delegate = {
-  getTileInfo: function(index) {
+  getTileInfo: function (index) {
     return {
       type: "my-pool",
       value: stack[stack.length - index - 1],
-      index: stack.length - index - 1
+      index: stack.length - index - 1,
     };
   },
-  configureTile: function(tile, info) {
+  configureTile: function (tile, info) {
     if (info.type == "my-pool") {
-      tile.getElementById("text").text = info.value.length > 16 ? `${info.value.substr(0,13)}...` : `${info.value}`;
+      tile.getElementById("text").text =
+        info.value.length > 16 ? `${info.value.substr(0, 13)}...` : `${info.value}`;
       let touch = tile.getElementById("touch-me");
-      touch.onclick = evt => {
+      touch.onclick = () => {
         if (!broken && stack.length > 0) {
-          answer.text = (stack.splice(info.index, 1))[0];
-          if (answer.text.includes(".")) {
+          answer.text = info.value;
+          stack.splice(info.index, 1);
+          if (answer.text.indexOf(".") >= 0) {
             decimalSet = true;
           }
           clear.text = "C";
@@ -51,15 +54,15 @@ VTList.delegate = {
         }
       };
     }
-  }
+  },
 };
 
 VTList.length = stack.length;
 
-stackClear.onclick = function(evt) {
+stackClear.onclick = function () {
   stack = new Array();
   VTList.length = stack.length;
-}
+};
 
 function clearOperator() {
   if (operation) {
@@ -73,19 +76,19 @@ function compute() {
   let firstNum = parseFloat(stored);
   let secNum = parseFloat(answer.text);
   if (secNum < -9007199254740991 || secNum > 9007199254740991) {
-    approximate.style.visibility = "visible"
+    approximate.style.visibility = "visible";
   }
   if (operator === "plus") {
     answer.text = "" + (firstNum + secNum);
   } else if (operator === "minus") {
     answer.text = "" + (firstNum - secNum);
   } else if (operator === "multiply") {
-    answer.text = "" + (firstNum * secNum);
+    answer.text = "" + firstNum * secNum;
   } else if (operator === "divide") {
     if (secNum === 0) {
       setToBroken();
     } else {
-      answer.text = "" + (firstNum / secNum);
+      answer.text = "" + firstNum / secNum;
     }
   } else if (operator === "exponent") {
     if (firstNum === 0 && secNum === 0) {
@@ -97,22 +100,22 @@ function compute() {
     if (firstNum === 0 || secNum === 0) {
       setToBroken();
     } else {
-      answer.text = "" + (Math.log(secNum) / Math.log(firstNum));
+      answer.text = "" + Math.log(secNum) / Math.log(firstNum);
     }
   }
   if (parseFloat(answer.text) < -9007199254740991 || parseFloat(answer.text) > 9007199254740991) {
-    approximate.style.visibility = "visible"
+    approximate.style.visibility = "visible";
   }
   stored = "0";
   clearOperator();
 }
 
-constants.forEach(constant => {
+constants.forEach((constant) => {
   let cid = constant.id;
-  constant.onclick = function(evt) {
+  constant.onclick = function () {
     if (!broken) {
       clear.text = "C";
-      if(cid === "e") {
+      if (cid === "e") {
         answer.text = `${Math.E}`;
         clearNext = false;
         decimalSet = true;
@@ -126,10 +129,10 @@ constants.forEach(constant => {
         constant.style.fill = "fb-red";
       }, 150);
     }
-  }
-})
+  };
+});
 
-equal.onclick = function(evt) {
+equal.onclick = function () {
   if (operation) {
     compute();
     container.value = 2;
@@ -137,11 +140,14 @@ equal.onclick = function(evt) {
   clearNext = true;
 };
 
-binOps.forEach(function(operator) {
-  operator.onclick = function(evt) {
+binOps.forEach(function (operator) {
+  operator.onclick = function () {
     if (!broken) {
-      if (parseFloat(answer.text) < -9007199254740991 || parseFloat(answer.text) > 9007199254740991) {
-        approximate.style.visibility = "visible"
+      if (
+        parseFloat(answer.text) < -9007199254740991 ||
+        parseFloat(answer.text) > 9007199254740991
+      ) {
+        approximate.style.visibility = "visible";
       }
       clearOperator();
       clear.text = "C";
@@ -149,24 +155,26 @@ binOps.forEach(function(operator) {
       operator.style.fill = "blue";
       stored = answer.text;
       clearNext = true;
-      container.value = 2;
+      decimalSet = false;
     }
-  }
+
+    container.value = 2;
+  };
 });
 
-unOps.forEach(function(operator) {
+unOps.forEach(function (operator) {
   let opId = operator.id;
-  operator.onclick = function(evt) {
+  operator.onclick = function () {
     let num = parseFloat(answer.text);
     if (!broken) {
       if (num < -9007199254740991 || num > 9007199254740991) {
-        approximate.style.visibility = "visible"
+        approximate.style.visibility = "visible";
       }
       if (opId === "reciprocal") {
         if (num === 0) {
           setToBroken();
         } else {
-          answer.text = "" + (1 / num);
+          answer.text = "" + 1 / num;
         }
       } else if (opId === "factorial") {
         if (num >= 0 && Math.round(num) === num && num < 171) {
@@ -175,46 +183,63 @@ unOps.forEach(function(operator) {
             result *= num;
             num = num - 1;
           }
-          answer.text = "" + result; 
+          answer.text = "" + result;
         } else {
           setToBroken();
-        }    
+        }
       } else if (opId === "sin") {
-        answer.text = "" + Math.sin(num);     
+        answer.text = "" + Math.sin(num);
       } else if (opId === "cos") {
-        answer.text = "" + Math.cos(num);     
+        answer.text = "" + Math.cos(num);
       } else if (opId === "tan") {
-        answer.text = "" + Math.tan(num);     
+        answer.text = "" + Math.tan(num);
       } else if (opId === "plus-minus") {
-        answer.text = "" + (0-num);     
+        answer.text = "" + (0 - num);
       } else if (opId === "flip") {
         let temp = stored;
         stored = answer.text;
-        answer.text = "" + temp;     
+        answer.text = "" + temp;
       }
-      
-      if (parseFloat(answer.text) < -9007199254740991 || parseFloat(answer.text) > 9007199254740991) {
-        approximate.style.visibility = "visible"
+
+      if (
+        parseFloat(answer.text) < -9007199254740991 ||
+        parseFloat(answer.text) > 9007199254740991
+      ) {
+        approximate.style.visibility = "visible";
       }
-      
+
+      decimalSet = false;
+
       operator.style.fill = "blue";
       setTimeout(() => {
         operator.style.fill = "darkred";
       }, 150);
+    } else {
+      container.value = 2;
     }
-  }
-})
+  };
+});
 
-function setToBroken() {
-  answer.text = "Error"; 
-  approximate.style.visibility = "hidden"
-  broken = true;
-  clear.text = "AC";
-  clear.style.fill = "goldenrod"
-  container.value = 2;
+function toggleClearBtnColor() {
+  if (clear.style.fill !== "#DAA520") {
+    //fb-red
+    clear.style.fill = "#DAA520"; //goldenrod
+  } else {
+    clear.style.fill = "#F83C40"; //fb-red
+  }
 }
 
-push.onclick = function(evt) {
+function setToBroken() {
+  answer.text = "Error";
+  approximate.style.visibility = "hidden";
+  broken = true;
+  clear.text = "AC";
+  container.value = 2;
+  toggleClearBtnColor();
+  waitClearTimeout = setInterval(toggleClearBtnColor, 1000);
+}
+
+push.onclick = function () {
   if (!broken && answer.text != "0") {
     stack.push(answer.text);
     answer.text = "0";
@@ -226,9 +251,9 @@ push.onclick = function(evt) {
       push.style.fill = "fb-red";
     }, 150);
   }
-}
+};
 
-pull.onclick = function(evt) {
+pull.onclick = function () {
   if (!broken && stack.length > 0) {
     answer.text = stack.pop();
     if (answer.text.indexOf(".") != -1) {
@@ -242,11 +267,10 @@ pull.onclick = function(evt) {
       pull.style.fill = "fb-red";
     }, 150);
   }
-}
+};
 
-
-numbers.forEach(function(element) {
-  element.onclick = function(evt) {
+numbers.forEach(function (element) {
+  element.onclick = function () {
     if (!broken) {
       if (clearNext) {
         answer.text = "0";
@@ -261,23 +285,23 @@ numbers.forEach(function(element) {
           answer.text += element.text;
         }
         clear.text = "C";
-        
+
         element.style.fill = "blue";
         setTimeout(() => {
           element.style.fill = "fb-red";
         }, 150);
       }
     }
-  }
+  };
 });
 
-decimal.onclick = function(evt) {
-  if (!broken && !decimalSet) {
+decimal.onclick = function () {
+  if (!broken) {
     if (clearNext) {
-      answer.text = "0";
+      answer.text = "0.";
       clearNext = false;
     }
-    if (answer.text.length < 17) {
+    if (!decimalSet && answer.text.length < 17) {
       answer.text = answer.text + ".";
       clear.text = "C";
       decimal.style.fill = "blue";
@@ -287,9 +311,9 @@ decimal.onclick = function(evt) {
     }
     decimalSet = true;
   }
-}
+};
 
-clear.onclick = function(evt) {
+clear.onclick = function () {
   if (clear.text === "AC") {
     clearOperator();
     stored = "0";
@@ -298,16 +322,17 @@ clear.onclick = function(evt) {
     approximate.style.visibility = "hidden";
   }
   clear.text = "AC";
-  clear.style.fill = "fb-red"
+  clear.style.fill = "fb-red";
   answer.text = "0";
   clearNext = true;
+  clearInterval(waitClearTimeout);
   broken = false;
   decimalSet = false;
   clear.style.fill = "blue";
   setTimeout(() => {
     clear.style.fill = "fb-red";
   }, 150);
-}
+};
 
 //////////////////////////
 // Tip Calculator Code
@@ -324,22 +349,23 @@ let totalElem = document.getElementById("newTotal");
 let percentage;
 let tip;
 let total;
-let totalWithTip;
 
 function round_to_precision(x, precision) {
-    var y = +x + (precision === undefined ? 0.5 : precision/2);
-    return y - (y % (precision === undefined ? 1 : +precision));
+  var y = +x + (precision === undefined ? 0.5 : precision / 2);
+  return y - (y % (precision === undefined ? 1 : +precision));
 }
 
 function recompute() {
   if (tip) {
-    total = (hd.value * 100) + (td.value * 10) + (od.value * 1) + (tc.value * 0.1) + (oc.value * 0.01);
-    tipElem.text = "Tip: $" + round_to_precision((total * tip), 0.01).toFixed(2);
-    totalElem.text = "New Total: $" + round_to_precision((total * (1 + tip)), 0.01).toFixed(2);
+    total = hd.value * 100 + td.value * 10 + od.value * 1 + tc.value * 0.1 + oc.value * 0.01;
+    tipElem.text = "Tip: $" + round_to_precision(total * tip, 0.01).toFixed(2);
+    totalElem.text = "New Total: $" + round_to_precision(total * (1 + tip), 0.01).toFixed(2);
   }
 }
 
-let response = function(evt) {recompute()};
+let response = function () {
+  recompute();
+};
 hd.addEventListener("select", response);
 td.addEventListener("select", response);
 od.addEventListener("select", response);
@@ -347,14 +373,14 @@ tc.addEventListener("select", response);
 oc.addEventListener("select", response);
 
 let percentages = document.getElementsByClassName("percentage");
-percentages.forEach(function(element) {
-  element.onclick = function(evt) {
+percentages.forEach(function (element) {
+  element.onclick = function () {
     if (percentage) {
       percentage.style.fill = "fb-red";
     }
     percentage = element;
     element.style.fill = "blue";
-    tip = parseInt(element.text.slice(0,2)) / 100;
+    tip = parseInt(element.text.slice(0, 2)) / 100;
     recompute();
-  }
+  };
 });
